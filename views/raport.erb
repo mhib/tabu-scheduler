@@ -1,0 +1,65 @@
+<h2 id="loading">Loading...</h2>
+<div id="table-container"></div>
+
+<script type="text/javascript">
+  (function() {
+    var createTable = function(data) {
+      var tableData = data.table[0].map(function(col, i) {
+        return data.table.map(function(row) {
+          return row[i];
+        });
+      });
+      var table = document.createElement('table');
+      var tableHeader = document.createElement('thead');
+      tableHeader.className = "thead-default";
+      var tr1 = document.createElement('tr');
+      var headCell = document.createElement('th');
+      headCell.colSpan = tableData.length;
+      headCell.innerHTML += "Min: " + data.min + ", ";
+      headCell.innerHTML += "Mid: " + data.mid + ", ";
+      headCell.innerHTML += "Max: " + data.max;
+      headCell.className = "text-center";
+      table.appendChild(tableHeader);
+      tableHeader.appendChild(tr1);
+      tr1.appendChild(headCell);
+      table.className = "table table-bordered";
+      var tableBody = document.createElement('tbody');
+
+      tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+
+        rowData.forEach(function(cellData) {
+          var cell = document.createElement('td');
+          cell.appendChild(document.createTextNode(cellData));
+          row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+      });
+
+      table.appendChild(tableBody);
+      document.getElementById("table-container").appendChild(table);
+    }
+    var path = "/get_raport/<%= @slug %>";
+    var intId = null;
+    var res = false;
+    var loop = function() {
+      $.ajax({
+        url: path,
+        method: 'GET',
+        success: function(data) {
+          if(res) { return; }
+          res = true;
+          data = JSON.parse(data);
+          console.log(data);
+          clearInterval(intId);
+          createTable(data);
+          $("#loading").remove();
+          $("#table-container").append("Generated in: " + data.duration);
+        },
+        fail: function() {}
+      });
+    };
+    intId = setInterval(loop, 500);
+  })();
+</script>

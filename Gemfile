@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'roda'
+gem 'puma'
+gem 'redis'
+gem 'erubis'
+gem 'tilt'
+gem 'hiredis'
+gem 'sidekiq'
+gem 'equalizer'
+gem 'pry'
