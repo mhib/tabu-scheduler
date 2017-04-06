@@ -1,6 +1,7 @@
 <h2 id="loading">Loading...</h2>
 <div id="table-container"></div>
 
+<% content_for :scripts do %>
 <script type="text/javascript">
   (function() {
     var createTable = function(data) {
@@ -39,7 +40,7 @@
 
       table.appendChild(tableBody);
       document.getElementById("table-container").appendChild(table);
-    }
+    };
     var path = "/get_raport/<%= @slug %>";
     var intId = null;
     var res = false;
@@ -60,6 +61,7 @@
         fail: function() {}
       });
     };
-    intId = setInterval(loop, 500);
+    intId = setInterval(loop, 750);
   })();
 </script>
+<% end %>
