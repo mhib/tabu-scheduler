@@ -8,7 +8,7 @@ services:
       - 'redis'
     depends_on: 
       - 'redis'
-    command: rackup
+    command: rackup -o 0.0.0.0
   sidekiq:
     build: .
     links: 
