@@ -1,3 +1,3 @@
 module Scheduling
-    REDIS = Redis.new(:url => 'redis://redis')
+  REDIS = Redis.new(url: ENV.fetch('REDIS_ADDR') { 'redis://localhost' })
 end
