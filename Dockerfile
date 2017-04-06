@@ -1,4 +1,1 @@
-FROM jruby:1.7-onbuild
-ADD .
-WORKDIR .
-RUN bundle install
+FROM jruby:9.1-onbuild

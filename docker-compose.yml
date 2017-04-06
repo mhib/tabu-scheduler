@@ -1,17 +1,26 @@
 version: '3'
 services:
   web:
-    image: "jruby:1.7-onbuild"
-    depends_on:
-      - "redis"
-    ports:
-      - "9292:9292"
     build: .
+    ports: 
+      - '9292:9292'
+    links: 
+      - 'redis'
+    depends_on: 
+      - 'redis'
+    environment:
+      REDIS_PROVIDER: REDIS_ADDR
+      REDIS_ADDR: 'redis://redis'
+    command: rackup -o 0.0.0.0
   sidekiq:
-    image: "jruby:1.7-onbuild"
     build: .
-    depends_on:
-      - "redis"
-    command: "bundle exec sidekiq -r ./sidekiq"
+    links: 
+      - 'redis'
+    depends_on: 
+      - 'redis'
+    environment:
+      REDIS_PROVIDER: REDIS_ADDR
+      REDIS_ADDR: 'redis://redis'
+    command: sidekiq -r ./sidekiq.rb
   redis:
-    image: "redis:alpine"
+    image: 'redis:alpine'
