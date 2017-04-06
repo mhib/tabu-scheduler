@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    image: "jruby:1.7-onbuild"
+    depends_on:
+      - "redis"
+    ports:
+      - "9292:9292"
+    build: .
+  sidekiq:
+    image: "jruby:1.7-onbuild"
+    build: .
+    depends_on:
+      - "redis"
+    command: "bundle exec sidekiq -r ./sidekiq"
+  redis:
+    image: "redis:alpine"
