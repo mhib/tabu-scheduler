@@ -16,7 +16,8 @@ services:
     depends_on: 
       - 'redis'
     environment:
-      REDIS_PROVIDER: 'redis'
+      REDIS_PROVIDER: REDIS_ADDR
+      REDIS_ADDR: 'redis://redis'
     command: sidekiq -r ./sidekiq.rb
   redis:
     image: 'redis:alpine'
