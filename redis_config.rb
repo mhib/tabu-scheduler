@@ -1,3 +1,3 @@
 module Scheduling
-  REDIS = Redis.new
+    REDIS = Redis.new(:url => 'redis://redis')
 end

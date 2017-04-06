@@ -8,6 +8,9 @@ services:
       - 'redis'
     depends_on: 
       - 'redis'
+    environment:
+      REDIS_PROVIDER: REDIS_ADDR
+      REDIS_ADDR: 'redis://redis'
     command: rackup -o 0.0.0.0
   sidekiq:
     build: .
