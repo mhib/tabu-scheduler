@@ -38,6 +38,7 @@ module Scheduling
 
       r.get 'get_raport', :id do |id|
         if val = REDIS.get(id)
+          response['Content-Type'] = 'text/json'
           val
         else
           response.status = 403

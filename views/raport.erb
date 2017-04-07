@@ -51,7 +51,6 @@
         success: function(data) {
           if(res) { return; }
           res = true;
-          data = JSON.parse(data);
           console.log(data);
           clearInterval(intId);
           createTable(data);
