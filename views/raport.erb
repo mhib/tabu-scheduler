@@ -1,17 +1,24 @@
 <% content_for :title, "Generating report..." %>
-<h2 id="loading">Loading...</h2>
+<div id="loading">
+  <h2>Loading...</h2>
+  <p>Your report is being generated</p>
+</div>
 <div id="table-container"></div>
 
 <% content_for :scripts do %>
 <script type="text/javascript">
   (function() {
-    var createTable = function(data) {
-      var tableData = data.table[0].map(function(col, i) {
-        return data.table.map(function(row) {
+    var transposeTable = function(table) {
+      return table[0].map(function(col, i) {
+        return table.map(function(row) {
           return row[i];
         });
       });
+    };
+    var createTable = function(data) {
+      var tableData = transposeTable(data.table);
       var table = document.createElement('table');
+
       var tableHeader = document.createElement('thead');
       tableHeader.className = "thead-default";
       var tr1 = document.createElement('tr');
@@ -25,6 +32,7 @@
       tableHeader.appendChild(tr1);
       tr1.appendChild(headCell);
       table.className = "table table-bordered";
+
       var tableBody = document.createElement('tbody');
 
       tableData.forEach(function(rowData) {
@@ -43,18 +51,17 @@
       document.getElementById("table-container").appendChild(table);
     };
     var path = "/get_raport/<%= @slug %>";
-    var intId = null;
+    var intervalId = null;
     var res = false;
-    var loop = function() {
+    var getReport = function() {
       $.ajax({
         url: path,
         method: 'GET',
         success: function(data) {
           if(res) { return; }
           res = true;
-          document.title = "Generated report!"
-          console.log(data);
-          clearInterval(intId);
+          document.title = "Generated report!";
+          clearInterval(intervalId);
           createTable(data);
           $("#loading").remove();
           $("#table-container").append("Generated in: " + data.duration);
@@ -62,7 +69,8 @@
         fail: function() {}
       });
     };
-    intId = setInterval(loop, 750);
+    getReport();
+    intervalId = setInterval(getReport, 750);
   })();
 </script>
 <% end %>
