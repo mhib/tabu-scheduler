@@ -18,13 +18,9 @@ module Scheduling
     end
 
     def call
-      a = nil
-      if tabu_type == 'roulette'
-        a = TabuRouletteSearch.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
-      else
-        a = TabuSearch.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
-      end
-      [[a], cost(a)]
+      klass = tabu_type == TabuRouletteSearch::ROULETTE_STRING_ID ? TabuRouletteSearch : TabuSearch
+      res = klass.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
+      [[res], cost(res)]
     end
 
     def fitness(x)

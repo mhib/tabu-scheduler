@@ -5,8 +5,6 @@ require_relative 'time_prediction'
 
 module Scheduling
   class ProblemSmarter
-    ROULETTE_STRING_ID = 'roulette'.freeze
-
     attr_reader :input, :building_count, :machine_count, :iterations, :tabu_size
     attr_accessor :tabu_type
     def initialize(input, building_count, machine_count, iterations, tabu_size, tabu_type)
@@ -21,13 +19,9 @@ module Scheduling
     end
 
     def call
-      a = nil
-      if @tabu_type == ROULETTE_STRING_ID
-        a = TabuRouletteSearch.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
-      else
-        a = TabuSearch.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
-      end
-      [a, cost(a)]
+      klass = tabu_type == TabuRouletteSearch::ROULETTE_STRING_ID ? TabuRouletteSearch : TabuSearch
+      res = klass.new(@starting.dup, iterations, method(:fitness).to_proc, tabu_size, method(:neighbours).to_proc).call
+      [res, cost(res)]
     end
 
     def fitness(x)
