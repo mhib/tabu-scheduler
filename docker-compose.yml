@@ -11,6 +11,7 @@ services:
     environment:
       REDIS_PROVIDER: REDIS_ADDR
       REDIS_ADDR: 'redis://redis'
+      RACK_ENV: 'production'
     command: rackup -o 0.0.0.0
   sidekiq:
     build: .
@@ -21,6 +22,6 @@ services:
     environment:
       REDIS_PROVIDER: REDIS_ADDR
       REDIS_ADDR: 'redis://redis'
-    command: sidekiq -r ./sidekiq.rb
+    command: sidekiq -e production -r ./sidekiq.rb
   redis:
     image: 'redis:alpine'
