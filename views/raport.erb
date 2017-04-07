@@ -1,3 +1,4 @@
+<% content_for :title, "Generating report..." %>
 <h2 id="loading">Loading...</h2>
 <div id="table-container"></div>
 
@@ -51,6 +52,7 @@
         success: function(data) {
           if(res) { return; }
           res = true;
+          document.title = "Generated report!"
           console.log(data);
           clearInterval(intId);
           createTable(data);
