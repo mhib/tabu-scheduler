@@ -1,0 +1,22 @@
+sudo: false
+language: ruby
+cache: bundler
+rvm:
+  - 2.4.0
+  - 2.3.0
+  - jruby-9
+matrix:
+  allow_failures:
+    - rvm: rbx
+    - rvm: 1.9.3
+    - rvm: ruby-head
+    - rvm: jruby-1.7
+    - rvm: rbx
+    - rvm: rbx-2.5.8
+    - rvm: 1.9.3
+    - rvm: ruby-head
+    - rvm: jruby-1.7
+    - rvm: rbx-2.5.8
+    - rvm: 2.2
+    - rvm: 2.1
+    - rvm: 2.0
