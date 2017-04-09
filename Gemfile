@@ -3,9 +3,10 @@ source 'https://rubygems.org'
 gem 'roda'
 gem 'puma'
 gem 'redis'
-gem 'erubis'
 gem 'tilt'
-gem 'hiredis'
+gem 'erubis'
 gem 'sidekiq'
 gem 'equalizer'
-gem 'pry'
+gem 'rake', groups: [:test, :development]
+gem 'pry', group: :development
+gem 'rspec', '~> 3.0', groups: [:test, :development]

@@ -6,7 +6,7 @@ module Scheduling
   class ProblemEasier
     attr_reader :input, :building_count, :machine_count, :iterations, :tabu_size
     attr_accessor :tabu_type
-    def initialize(input, building_count, machine_count, iterations, tabu_size, taby_type)
+    def initialize(input, building_count, machine_count, iterations, tabu_size, tabu_type)
       @input = input.group_by(&:machine)
       @starting = (1..building_count).to_a
       @building_count = building_count
@@ -25,11 +25,11 @@ module Scheduling
 
     def fitness(x)
       fuzzed = cost(x)
-      -0.25 * (fuzzed.min + fuzzed.mid + fuzzed.mid + fuzzed.max)
+      0.25 * (fuzzed.min + fuzzed.mid + fuzzed.mid + fuzzed.max)
     end
 
     def cost(x)
-      return -1.0 / 0 if x.nil?
+      return 1.0 / 0 if x.nil?
       c = Array.new(@machine_count + 1) { [] }
       (1..@machine_count).each do |i|
         (1..@building_count).each do |j|

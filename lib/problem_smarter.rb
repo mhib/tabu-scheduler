@@ -26,11 +26,11 @@ module Scheduling
 
     def fitness(x)
       fuzzed = cost(x)
-      -0.25 * (fuzzed.min + fuzzed.mid + fuzzed.mid + fuzzed.max)
+      0.25 * (fuzzed.min + fuzzed.mid + fuzzed.mid + fuzzed.max)
     end
 
     def cost(x)
-      return FuzzyNumber.new(-1.0 / 0, -1.0 / 0, -1.0 / 0) if x.nil?
+      return FuzzyNumber.new(1.0 / 0, 1.0 / 0, 1.0 / 0) if x.nil?
       c = Array.new(@machine_count + 1) { [] }
       (1..@machine_count).each do |i|
         (1..@building_count).each do |j|
