@@ -37,7 +37,7 @@ module Scheduling
       end
 
       r.get 'get_raport', :id do |id|
-        if val = REDIS.get(id)
+        if (val = REDIS.get(id))
           response['Content-Type'] = 'text/json'
           val
         else
