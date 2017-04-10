@@ -22,5 +22,13 @@ module Scheduling
     def include?(x)
       x >= min && x <= max
     end
+
+    def defuzzyficate
+      (min + mid + mid + max) / 4
+    end
+
+    def self.zero
+      new(0, 0, 0)
+    end
   end
 end

@@ -25,8 +25,7 @@ module Scheduling
     end
 
     def fitness(x)
-      fuzzed = cost(x)
-      0.25 * (fuzzed.min + fuzzed.mid + fuzzed.mid + fuzzed.max)
+      cost(x).defuzzyficate
     end
 
     def cost(x)
@@ -35,8 +34,8 @@ module Scheduling
       (1..@machine_count).each do |i|
         (1..@building_count).each do |j|
           el = @input[i][x[i - 1][j - 1] - 1].number
-          ci = c[i - 1].fetch(j) { FuzzyNumber.new(0.0, 0.0, 0.0) }
-          cj = c[i].fetch(j - 1) { FuzzyNumber.new(0.0, 0.0, 0.0) }
+          ci = c[i - 1].fetch(j) { FuzzyNumber.zero }
+          cj = c[i].fetch(j - 1) { FuzzyNumber.zero }
           c[i][j] = FuzzyNumber.new(
             [ci.min, cj.min].max + el.min,
             [ci.mid, cj.mid].max + el.mid,
@@ -51,17 +50,10 @@ module Scheduling
       Enumerator.new do |yielder|
         @combinations.shuffle.each do |l, k|
           (0...@machine_count).each do |n|
-            yielder << perm.dup.tap { |e| e[n] = permute(e[n].dup, l, k) }
+            yielder << perm.dup.tap { |e| e[n] = e[n].dup.tap { |a| a[l], a[k] = a[k], a[l] } }
           end
         end
       end
-    end
-
-    private
-
-    def permute(a, l, k)
-      a[l], a[k] = a[k], a[l]
-      a
     end
   end
 end

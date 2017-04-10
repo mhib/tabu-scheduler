@@ -92,4 +92,12 @@ RSpec.describe Scheduling::FuzzyNumber do
       end
     end
   end
+
+  describe '#defuzzyficate' do
+      let(:fuzzy) { Scheduling::FuzzyNumber.new(1, 2, 3) }
+
+      it 'has correct value' do
+        expect(fuzzy.defuzzyficate).to eq (1 + 2 + 2 + 3) / 4.0
+      end
+  end
 end

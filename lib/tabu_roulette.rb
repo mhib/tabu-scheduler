@@ -18,7 +18,7 @@ module Scheduling
         best = [n, fit] if fit < best[1]
         [n, fit]
       end
-      return best if best[1] > @best_fitness
+      return best if best[1] < @best_fitness
       sel = rand(0..sum)
       cache.shuffle.each do |perm, fit|
         sel -= 1 / fit
