@@ -94,10 +94,48 @@ RSpec.describe Scheduling::FuzzyNumber do
   end
 
   describe '#defuzzyficate' do
-      let(:fuzzy) { Scheduling::FuzzyNumber.new(1, 2, 3) }
+    let(:fuzzy) { Scheduling::FuzzyNumber.new(1, 2, 3) }
 
-      it 'has correct value' do
-        expect(fuzzy.defuzzyficate).to eq (1 + 2 + 2 + 3) / 4.0
-      end
+    it 'has correct value' do
+      expect(fuzzy.defuzzyficate).to eq (1 + 2 + 2 + 3) / 4.0
+    end
+  end
+
+  describe '#add' do
+    let(:fuzzy) { Scheduling::FuzzyNumber.new(1, 2, 3) }
+    let(:fuzzy2) { Scheduling::FuzzyNumber.new(4, 5, 6) }
+
+    it 'it adds fuzzy numbers' do
+      num = fuzzy.add(fuzzy2)
+      expect(num.min).to eq 5
+      expect(num.mid).to eq 7
+      expect(num.max).to eq 9
+    end
+
+    it 'mutates object' do
+      fuzzy.add(fuzzy2)
+      expect(fuzzy.min).to eq 5
+      expect(fuzzy.mid).to eq 7
+      expect(fuzzy.max).to eq 9
+    end
+  end
+
+  describe '#+' do
+    let(:fuzzy) { Scheduling::FuzzyNumber.new(1, 2, 3) }
+    let(:fuzzy2) { Scheduling::FuzzyNumber.new(4, 5, 6) }
+
+    it 'it adds fuzzy numbers' do
+      num = fuzzy + fuzzy2
+      expect(num.min).to eq 5
+      expect(num.mid).to eq 7
+      expect(num.max).to eq 9
+    end
+
+    it 'does not mutate object' do
+      _res = fuzzy + fuzzy2
+      expect(fuzzy.min).to eq 1
+      expect(fuzzy.mid).to eq 2
+      expect(fuzzy.max).to eq 3
+    end
   end
 end

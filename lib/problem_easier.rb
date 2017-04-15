@@ -36,10 +36,10 @@ module Scheduling
           ci = c[i - 1].fetch(j) { FuzzyNumber.zero }
           cj = c[i].fetch(j - 1) { FuzzyNumber.zero }
           c[i][j] = FuzzyNumber.new(
-            [ci.min, cj.min].max + el.min,
-            [ci.mid, cj.mid].max + el.mid,
-            [ci.max, cj.max].max + el.max
-          )
+            [ci.min, cj.min].max,
+            [ci.mid, cj.mid].max,
+            [ci.max, cj.max].max
+          ).add(el)
         end
       end
       c[@machine_count][@building_count]

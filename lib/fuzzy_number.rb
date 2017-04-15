@@ -7,9 +7,9 @@ module Scheduling
 
     attr_accessor :min, :mid, :max
     def initialize(min, mid, max)
-      @min = min.to_f
-      @mid = mid.to_f
-      @max = max.to_f
+      @min = min
+      @mid = mid
+      @max = max
     end
 
     def call(x)
@@ -24,11 +24,22 @@ module Scheduling
     end
 
     def defuzzyficate
-      (min + mid + mid + max) / 4
+      (min + mid + mid + max) / 4.0
+    end
+
+    def add(other)
+      @min += other.min
+      @mid += other.mid
+      @max += other.max
+      self
+    end
+
+    def +(other)
+      dup.add(other)
     end
 
     def self.zero
-      new(0, 0, 0)
+      new(0.0, 0.0, 0.0)
     end
   end
 end
