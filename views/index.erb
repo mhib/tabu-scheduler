@@ -5,7 +5,6 @@
     <form class="form-horizontal" action="/analyze" method="post">
       <fieldset>
 
-        <!-- Form Name -->
         <legend>Dane</legend>
 
         <div class="form-group">
@@ -24,23 +23,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="iterations_count">Liczba iteracji</label>
-          <div class="col-md-4">
-            <input id="iterations_count" name="iterations_count" placeholder="Liczba iteracji" class="form-control input-md" required="" type="number" value="100">
-
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="tabu_size">Wielkość tabu</label>
-          <div class="col-md-4">
-            <input id="tabu_size" name="tabu_size" placeholder="Wielkość tabu" class="form-control input-md" required="" type="number" value = "30">
-
-          </div>
-        </div>
-
-        <!-- Multiple Radios -->
         <div class="form-group">
           <label class="col-md-4 control-label" for="type">Rodzaj problemu</label>
           <div class="col-md-4">
@@ -65,8 +47,23 @@
           </div>
         </div>
 
-        <!-- Multiple Radios (inline) -->
-        <div class="form-group">
+        <div class="form-group" id="iteration_group">
+          <label class="col-md-4 control-label" for="iterations_count">Liczba iteracji</label>
+          <div class="col-md-4">
+            <input id="iterations_count" name="iterations_count" placeholder="Liczba iteracji" class="form-control input-md" required="" type="number" value="100">
+
+          </div>
+        </div>
+
+        <div class="form-group" id="tabu_size_group">
+          <label class="col-md-4 control-label" for="tabu_size">Wielkość tabu</label>
+          <div class="col-md-4">
+            <input id="tabu_size" name="tabu_size" placeholder="Wielkość tabu" class="form-control input-md" required="" type="number" value = "30">
+
+          </div>
+        </div>
+
+        <div class="form-group" id="tabu_type_group">
           <label class="col-md-4 control-label" for="tabu_type">Rodzaj wyszukiwania tabu</label>
           <div class="col-md-4">
             <label class="radio-inline" for="random">
@@ -123,3 +120,18 @@
     </form>
   </div>
 </div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+  $(function() {
+    var toToggle = ['#tabu_size_group', '#iteration_group', '#tabu_type_group'];
+    $("input[name='type']").change(function() {
+      if($(this).val() === 'all_permutation') {
+        toToggle.forEach(function(el) { $(el).addClass('hidden'); });
+      } else {
+        toToggle.forEach(function(el) { $(el).removeClass('hidden'); });
+      }
+    });
+  });
+</script>
+<% end %>
