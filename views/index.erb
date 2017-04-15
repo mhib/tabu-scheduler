@@ -39,8 +39,8 @@
               </label>
             </div>
             <div class="radio">
-              <label for="all_permutation">
-                <input name="type" id="all_permutation" value="all_permutation" type="radio">
+              <label for="all_permutations">
+                <input name="type" id="all_permutations" value="all_permutations" type="radio">
                 Identyczne terminarze dla maszyn z rozważeniem wszystkich permutacji
               </label>
             </div>
@@ -126,7 +126,7 @@
   $(function() {
     var toToggle = ['#tabu_size_group', '#iteration_group', '#tabu_type_group'];
     $("input[name='type']").change(function() {
-      if($(this).val() === 'all_permutation') {
+      if($(this).val() === 'all_permutations') {
         toToggle.forEach(function(el) { $(el).addClass('hidden'); });
       } else {
         toToggle.forEach(function(el) { $(el).removeClass('hidden'); });

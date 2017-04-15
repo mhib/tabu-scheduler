@@ -12,7 +12,7 @@ class ProblemWorker
   PROBLEMS_MAP = {
     'easier'.freeze => Scheduling::ProblemEasier,
     'smarter'.freeze => Scheduling::ProblemSmarter,
-    'all_permutation'.freeze => Scheduling::ProblemAllPermutations
+    'all_permutations'.freeze => Scheduling::ProblemAllPermutations
   }
   DELETE_DELAY = 5 * 60
 
