@@ -45,8 +45,8 @@
           <label class="col-md-4 control-label" for="type">Rodzaj problemu</label>
           <div class="col-md-4">
             <div class="radio">
-              <label for="harder">
-                <input name="type" id="harder" value="harder" checked="checked" type="radio">
+              <label for="smarter">
+                <input name="type" id="smarter" value="smarter" checked="checked" type="radio">
                 Różne terminarze dla maszyn
               </label>
             </div>
@@ -54,6 +54,12 @@
               <label for="easier">
                 <input name="type" id="easier" value="easier" type="radio">
                 Identyczne terminarze dla maszyn
+              </label>
+            </div>
+            <div class="radio">
+              <label for="all_permutation">
+                <input name="type" id="all_permutation" value="all_permutation" type="radio">
+                Identyczne terminarze dla maszyn z rozważeniem wszystkich permutacji
               </label>
             </div>
           </div>
@@ -65,7 +71,7 @@
           <div class="col-md-4">
             <label class="radio-inline" for="random">
               <input name="tabu_type" id="random" value="random" checked="checked" type="radio">
-              Losowy
+              Losowy najlepszy
             </label>
             <label class="radio-inline" for="roulette">
               <input name="tabu_type" id="roulette" value="roulette" type="radio">

@@ -1,17 +1,24 @@
 require 'sidekiq'
 require_relative '../lib/problem_easier'
 require_relative '../lib/problem_smarter'
+require_relative '../lib/problem_all_permutations'
 require_relative '../redis_config'
 require_relative 'delete_problem_worker'
 require 'pry'
+
 class ProblemWorker
   include Sidekiq::Worker
 
+  PROBLEMS_MAP = {
+    'easier'.freeze => Scheduling::ProblemEasier,
+    'smarter'.freeze => Scheduling::ProblemSmarter,
+    'all_permutation'.freeze => Scheduling::ProblemAllPermutations
+  }
   DELETE_DELAY = 5 * 60
 
   def perform(params, slug)
     start = Time.now.to_f
-    klass = params['type'] == 'easier' ? Scheduling::ProblemEasier : Scheduling::ProblemSmarter
+    klass = PROBLEMS_MAP[params['type']]
     res = klass.new(*problem_arguments(params)).call
     Scheduling::REDIS.set(slug, {
       table: res.first,
