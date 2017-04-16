@@ -57,13 +57,13 @@ RSpec.describe Scheduling::Web do
       expect(redis).to have_received(:set).with(computing_slug, true)
     end
 
-    it 'redirects to raport view' do
+    it 'redirects to report view' do
       expect(last_response).to be_redirect
-      expect(last_response.location).to eq '/view_raport/my_slug'
+      expect(last_response.location).to eq '/view_report/my_slug'
     end
   end
 
-  describe 'GET /view_raport' do
+  describe 'GET /view_report' do
     let(:slug) { 'my_slug' }
     let(:computing_slug) { 'computing_my_slug' }
     let(:slugger) { double('Slugger', generate_slug: slug, computing_slug: computing_slug) }
@@ -77,10 +77,10 @@ RSpec.describe Scheduling::Web do
 
       before do
         stub_const('Scheduling::REDIS', redis)
-        get "/view_raport/#{slug}"
+        get "/view_report/#{slug}"
       end
 
-      it 'renders raport view' do
+      it 'renders report view' do
         expect(slugger).to have_received(:computing_slug).with slug
         expect(redis).to have_received(:get).with computing_slug
         expect(last_response).to be_ok
@@ -93,7 +93,7 @@ RSpec.describe Scheduling::Web do
 
       before do
         stub_const('Scheduling::REDIS', redis)
-        get "/view_raport/#{slug}"
+        get "/view_report/#{slug}"
       end
 
       it 'redirects to root' do
@@ -103,28 +103,28 @@ RSpec.describe Scheduling::Web do
     end
   end
 
-  describe 'GET /view_raport' do
+  describe 'GET /view_report' do
     let(:slug) { 'my_slug' }
     let(:json_string) { '{ value: "s" }' }
     let(:redis) { double('Redis', get: json_string, set: true) }
 
     before do
       stub_const('Scheduling::REDIS', redis)
-      get "/get_raport/#{slug}"
+      get "/get_report/#{slug}"
     end
-    context 'raport exists' do
+    context 'report exists' do
       it 'renders value' do
         expect(last_response).to be_ok
         expect(last_response.headers['Content-Type']).to eq 'text/json'
       end
     end
 
-    context 'raport does not exist' do
+    context 'report does not exist' do
       let(:redis) { double('Redis', get: false, set: true) }
 
       before do
         stub_const('Scheduling::REDIS', redis)
-        get "/get_raport/#{slug}"
+        get "/get_report/#{slug}"
       end
 
       it 'sets status to 403' do
