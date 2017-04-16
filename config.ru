@@ -31,8 +31,8 @@ module Scheduling
       end
 
       r.get 'view_raport', :slug do |slug|
+        r.redirect '/' unless REDIS.get Slugger.computing_slug(slug)
         @slug = slug
-        r.redirect "/" unless REDIS.get Slugger.computing_slug(slug)
         view :raport
       end
 

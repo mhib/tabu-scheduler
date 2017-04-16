@@ -50,7 +50,7 @@
       table.appendChild(tableBody);
       document.getElementById("table-container").appendChild(table);
     };
-    var path = "/get_raport/<%= @slug %>";
+    var path = "/get_raport/<%== @slug %>";
     var intervalId = null;
     var res = false;
     var getReport = function() {
