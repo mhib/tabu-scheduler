@@ -10,3 +10,4 @@ gem 'equalizer'
 gem 'rake', groups: [:test, :development]
 gem 'pry', group: :development
 gem 'rspec', '~> 3.0', groups: [:test, :development]
+gem "rack-test", require: "rack/test", groups: [:test]

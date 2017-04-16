@@ -1,8 +1,8 @@
 require 'sidekiq'
 require_relative '../lib/problem_easier'
 require_relative '../lib/problem_smarter'
-require_relative '../redis_config'
-require_relative '../slugger'
+require_relative '../lib/redis_config'
+require_relative '../lib/slugger'
 require 'pry'
 
 class DeleteProblemWorker

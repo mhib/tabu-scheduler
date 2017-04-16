@@ -2,7 +2,7 @@ require 'sidekiq'
 require_relative '../lib/problem_easier'
 require_relative '../lib/problem_smarter'
 require_relative '../lib/problem_all_permutations'
-require_relative '../redis_config'
+require_relative '../lib/redis_config'
 require_relative 'delete_problem_worker'
 require 'pry'
 
