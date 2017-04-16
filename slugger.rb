@@ -11,9 +11,10 @@ module Scheduling
 
     def generate_slug
       slug = nil
-      begin
+      loop do
         slug = "problem_#{SecureRandom.urlsafe_base64(30)}";
-      end while REDIS.get(slug) || REDIS.get(computing_slug(slug))
+        break unless REDIS.get(slug) || REDIS.get(computing_slug(slug))
+      end
       slug
     end
   end
