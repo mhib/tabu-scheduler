@@ -15,12 +15,12 @@ module Scheduling
       @best = @current
       @best_fitness = fitness.call(@current)
       @steps.times do
-        best_candidate, best_fitness = choose_best_neighbour
-        break if best_candidate.nil?
-        @current = best_candidate
-        if best_fitness < @best_fitness
+        temp_best_candidate, temp_best_fitness = choose_best_neighbour
+        break if temp_best_candidate.nil?
+        @current = temp_best_candidate
+        if temp_best_fitness < @best_fitness
           @best = @current
-          @best_fitness = best_fitness
+          @best_fitness = temp_best_fitness
         end
         add_to_tabu(@current)
       end
@@ -35,15 +35,15 @@ module Scheduling
     end
 
     def choose_best_neighbour
-      best_candidate = nil
-      best_fitness = 1.0 / 0
+      temp_best_candidate = nil
+      temp_best_fitness = 1.0 / 0
       neighbours.call(@current).each do |ne|
-        if !@tabu.include?(ne) && (nef = fitness.call(ne)) < best_fitness
-          best_candidate = ne
-          best_fitness = nef
+        if !@tabu.include?(ne) && (nef = fitness.call(ne)) < temp_best_fitness
+          temp_best_candidate = ne
+          temp_best_fitness = nef
         end
       end
-      [best_candidate, best_fitness]
+      [temp_best_candidate, temp_best_fitness]
     end
   end
 end
