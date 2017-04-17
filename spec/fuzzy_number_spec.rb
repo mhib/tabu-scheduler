@@ -1,5 +1,4 @@
-require 'fuzzy_number'
-
+require 'scheduling/fuzzy_number'
 RSpec.describe Scheduling::FuzzyNumber do
   describe '#==' do
     context 'same values' do

@@ -1,4 +1,4 @@
-require 'problem_smarter'
+require 'scheduling/problem_smarter'
 
 RSpec.describe Scheduling::ProblemSmarter do
   describe '#neighbours' do

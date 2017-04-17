@@ -1,4 +1,4 @@
-require 'tabu_search'
+require 'scheduling/tabu_search'
 require 'prime'
 
 RSpec.describe Scheduling::TabuSearch do

@@ -1,8 +1,8 @@
-require_relative 'fuzzy_number'
-require_relative 'tabu_search'
-require_relative 'tabu_roulette'
-require_relative 'time_prediction'
-require_relative 'costable'
+require 'scheduling/fuzzy_number'
+require 'scheduling/tabu_search'
+require 'scheduling/tabu_roulette'
+require 'scheduling/time_prediction'
+require 'scheduling/costable'
 
 module Scheduling
   class ProblemSmarter

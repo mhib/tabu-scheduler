@@ -1,4 +1,4 @@
-require_relative 'fuzzy_number'
+require 'scheduling/fuzzy_number'
 
 module Scheduling
   module Costable

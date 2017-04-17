@@ -1,2 +1,2 @@
-require_relative 'lib/web'
+require_relative 'app/web'
 run Scheduling::Web.freeze.app

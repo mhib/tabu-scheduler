@@ -1,5 +1,5 @@
 require 'securerandom'
-require_relative 'redis_config'
+require 'scheduling/redis_config'
 
 module Scheduling
   module Slugger

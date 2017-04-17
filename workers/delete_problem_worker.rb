@@ -1,9 +1,9 @@
 require 'sidekiq'
-require_relative '../lib/problem_easier'
-require_relative '../lib/problem_smarter'
-require_relative '../lib/redis_config'
-require_relative '../lib/slugger'
-require 'pry'
+require_relative '../lib/scheduling'
+require 'scheduling/problem_easier'
+require 'scheduling/problem_smarter'
+require 'scheduling/redis_config'
+require 'scheduling/slugger'
 
 class DeleteProblemWorker
   include Sidekiq::Worker
