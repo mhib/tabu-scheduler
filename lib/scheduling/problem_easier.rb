@@ -1,5 +1,5 @@
-require 'scheduling/fuzzy_number'
 require 'scheduling/tabu_search'
+require 'scheduling/tabu_roulette'
 require 'scheduling/time_prediction'
 require 'scheduling/costable'
 

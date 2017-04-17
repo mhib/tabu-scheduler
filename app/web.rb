@@ -1,8 +1,6 @@
 require 'roda'
 require_relative '../workers/problem_worker'
 require_relative '../lib/scheduling'
-require 'scheduling/redis_config'
-require 'scheduling/slugger'
 
 module Scheduling
   class Web < Roda

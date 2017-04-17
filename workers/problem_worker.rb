@@ -1,10 +1,6 @@
 require 'sidekiq'
 require_relative 'delete_problem_worker'
 require_relative '../lib/scheduling'
-require 'scheduling/problem_easier'
-require 'scheduling/problem_smarter'
-require 'scheduling/problem_all_permutations'
-require 'scheduling/redis_config'
 
 class ProblemWorker
   include Sidekiq::Worker

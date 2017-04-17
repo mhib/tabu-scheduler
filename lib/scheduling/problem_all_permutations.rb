@@ -1,6 +1,3 @@
-require 'scheduling/fuzzy_number'
-require 'scheduling/tabu_search'
-require 'scheduling/time_prediction'
 require 'scheduling/costable'
 
 module Scheduling
