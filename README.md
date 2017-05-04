@@ -3,7 +3,7 @@
 tabu-scheduler
 ===========
 
-__Building
+Building
 -----------
 
 With docker composer
