@@ -17,9 +17,9 @@ module Scheduling
           ci = c[i - 1].fetch(j) { FuzzyNumber.zero }
           cj = c[i].fetch(j - 1) { FuzzyNumber.zero }
           c[i][j] = FuzzyNumber.new(
-            [ci.min, cj.min].max,
-            [ci.mid, cj.mid].max,
-            [ci.max, cj.max].max
+            max(ci.min, cj.min),
+            max(ci.mid, cj.mid),
+            max(ci.max, cj.max)
           ).add(el)
         end
       end
@@ -32,6 +32,10 @@ module Scheduling
       define_method sym do |*_args|
         raise NotImplementedError, "#{sym} method is not implemented!"
       end
+    end
+
+    def max(left, right)
+      left > right ? left : right
     end
   end
 end
